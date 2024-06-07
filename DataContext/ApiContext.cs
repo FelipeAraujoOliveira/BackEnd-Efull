@@ -13,6 +13,6 @@ namespace ApiProva.DataContext
         public DbSet<Usuario> Usuarios { get; set; }
 
         public DbSet<Central> UsuariosCentral { get; set; }
-
+        public DbSet<Entrega> Entregas { get; set; }
     }
 }
