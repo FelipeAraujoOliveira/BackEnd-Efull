@@ -4,7 +4,7 @@
     {
         public string EnderecoDestinatario { get; set; }
         public string EnderecoRemetente { get; set; }
-        public double Distancia { get; set; } // Adicionando propriedade para armazenar a distância em quilômetros
+        public double Distancia { get; set; }
         public string Status { get; set; }
     }
 }

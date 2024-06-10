@@ -51,7 +51,7 @@ namespace ApiProva.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> AtualizarStatus(int id, [FromBody] EntregaDTO atualizarStatusDto)
+        public async Task<IActionResult> AtualizarStatus(int id, [FromBody] AtualizarStatusDTO atualizarStatusDto)
         {
             var entrega = await _context.Entregas.FindAsync(id);
             if (entrega == null)
@@ -59,11 +59,27 @@ namespace ApiProva.Controllers
                 return NotFound();
             }
 
+            if (atualizarStatusDto.Status != "Finalizada")
+            {
+                return BadRequest(new { message = "Status inválido. O status deve ser 'Finalizada'." });
+            }
+
             entrega.Status = atualizarStatusDto.Status;
             _context.Entregas.Update(entrega);
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Entrega>> GetEntregaById(int id)
+        {
+            var entrega = await _context.Entregas.FindAsync(id);
+            if (entrega == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(entrega);
         }
     }
 }
